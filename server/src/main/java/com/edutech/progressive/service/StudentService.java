@@ -3,15 +3,16 @@ package com.edutech.progressive.service;
 import com.edutech.progressive.dto.StudentDTO;
 import com.edutech.progressive.entity.Student;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public interface StudentService {
 
-    List<Student> getAllStudents();
+    List<Student> getAllStudents()throws SQLException;
 
-    Integer addStudent(Student student);
+    Integer addStudent(Student student)throws SQLException;
 
-    List<Student> getAllStudentSortedByName();
+    List<Student> getAllStudentSortedByName()throws SQLException;
 
     default void emptyArrayList() {
     }

@@ -1,5 +1,41 @@
 package com.edutech.progressive.dao;
 
-public class StudentDAOImpl {
+import java.sql.SQLException;
+import java.util.List;
+
+import com.edutech.progressive.entity.Student;
+
+public class StudentDAOImpl implements StudentDAO{
+
+    @Override
+    public int addStudent(Student student) throws SQLException {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'addStudent'");
+    }
+
+    @Override
+    public Student getStudentById(int studentId) throws SQLException {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getStudentById'");
+    }
+
+    @Override
+    public void updateStudent(Student student) throws SQLException {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'updateStudent'");
+    }
+
+    @Override
+    public void deleteStudent(int studentId) throws SQLException {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'deleteStudent'");
+    }
+
+    @Override
+    public List<Student> getAllStudents() throws SQLException {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getAllStudents'");
+    }
+
 
 }

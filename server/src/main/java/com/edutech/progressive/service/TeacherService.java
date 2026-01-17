@@ -3,15 +3,16 @@ package com.edutech.progressive.service;
 import com.edutech.progressive.dto.TeacherDTO;
 import com.edutech.progressive.entity.Teacher;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public interface TeacherService {
 
-    public List<Teacher> getAllTeachers();
+    public List<Teacher> getAllTeachers()throws SQLException;
 
-    public Integer addTeacher(Teacher teacher);
+    public Integer addTeacher(Teacher teacher)throws SQLException;
 
-    public List<Teacher> getTeacherSortedByExperience();
+    public List<Teacher> getTeacherSortedByExperience()throws SQLException;
 
     default void emptyArrayList() {
     }
