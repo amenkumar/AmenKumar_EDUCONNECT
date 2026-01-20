@@ -4,11 +4,14 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import com.edutech.progressive.entity.Student;
 import com.edutech.progressive.service.StudentService;
 
+@Service
 public class StudentServiceImplArraylist  implements StudentService {
-    private List<Student> studentList=new ArrayList<>();
+    private static List<Student> studentList=new ArrayList<>();
 
 
     @Override
