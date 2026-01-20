@@ -3,6 +3,7 @@ package com.edutech.progressive.controller;
 import com.edutech.progressive.entity.Student;
 import com.edutech.progressive.service.impl.StudentServiceImplArraylist;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -16,7 +17,9 @@ import java.util.List;
 @RestController
 public class StudentController {
 
-    private StudentServiceImplArraylist serviceImplArraylist = new StudentServiceImplArraylist();
+    @Autowired
+    private StudentServiceImplArraylist serviceImplArraylist;
+    
     @GetMapping("/student")
     public ResponseEntity<List<Student>> getAllStudents() {
         return null;
