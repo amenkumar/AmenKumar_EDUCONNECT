@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.NoSuchElementException;
+
 @RestController
 @RequestMapping("/student")
 public class StudentController {
@@ -30,7 +32,7 @@ public class StudentController {
     @GetMapping
     public ResponseEntity<List<Student>> getAllStudents() {
         try {
-            return new ResponseEntity<>(studentServiceImplJpa.getAllStudents(),HttpStatus.OK);
+            return new ResponseEntity<>(studentServiceImplJpa.getAllStudents(), HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -39,30 +41,33 @@ public class StudentController {
     @GetMapping("/{studentId}")
     public ResponseEntity<Student> getStudentById(@PathVariable int studentId) {
         try {
-            return new ResponseEntity<>(studentServiceImplJpa.getStudentById(studentId),HttpStatus.OK);
+            return new ResponseEntity<>(studentServiceImplJpa.getStudentById(studentId), HttpStatus.OK);
+        } catch (NoSuchElementException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
-    
     @PostMapping
     public ResponseEntity<Integer> addStudent(@RequestBody Student student) {
         try {
-            return new ResponseEntity<>(studentServiceImplJpa.addStudent(student),HttpStatus.CREATED);
-        // } catch (RuntimeException e) {
-        
+            return new ResponseEntity<>(studentServiceImplJpa.addStudent(student), HttpStatus.CREATED);
+        } catch (IllegalArgumentException e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     @PutMapping("/{studentId}")
-    public ResponseEntity<Void> updateStudent(@PathVariable int studentId,@RequestBody Student student) {
+    public ResponseEntity<Void> updateStudent(@PathVariable int studentId, @RequestBody Student student) {
         try {
             student.setStudentId(studentId);
             studentServiceImplJpa.updateStudent(student);
             return new ResponseEntity<>(HttpStatus.OK);
+        } catch (IllegalArgumentException e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         } catch (Exception e) {
             throw new RuntimeException("");
         }
@@ -73,25 +78,25 @@ public class StudentController {
         try {
             studentServiceImplJpa.deleteStudent(studentId);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-
+        } catch (NoSuchElementException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
-    
     @GetMapping("/fromArrayList")
     public ResponseEntity<List<Student>> getAllStudentFromArrayList() {
-        return new ResponseEntity<>(studentServiceImplArraylist.getAllStudents(),HttpStatus.OK);
+        return new ResponseEntity<>(studentServiceImplArraylist.getAllStudents(), HttpStatus.OK);
     }
 
     @PostMapping("/toArrayList")
     public ResponseEntity<Integer> addStudentToArrayList(Student student) {
-        return new ResponseEntity<>(studentServiceImplArraylist.addStudent(student),HttpStatus.CREATED);
+        return new ResponseEntity<>(studentServiceImplArraylist.addStudent(student), HttpStatus.CREATED);
     }
 
     @GetMapping("/fromArrayList/sorted")
     public ResponseEntity<List<Student>> getAllStudentSortedByNameFromArrayList() {
-        return new ResponseEntity<>(studentServiceImplArraylist.getAllStudentSortedByName(),HttpStatus.OK);
+        return new ResponseEntity<>(studentServiceImplArraylist.getAllStudentSortedByName(), HttpStatus.OK);
     }
 }
